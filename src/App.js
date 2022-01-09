@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import React, { useState } from "react";
 import Textform from "./components/Textform";
 import Alert from "./components/Alert";
-// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
@@ -34,7 +34,7 @@ function App() {
   };
   return (
     <>
-      {/* <Router> */}
+      <Router>
         <Navbar
           title="Textutils"
           Abouttext="About"
@@ -42,21 +42,21 @@ function App() {
           toggleMode={toggleMode}
         />
         <Alert alert={alert} />
-        <div className="container my-3">
-        {/* <Switch>
-          <Route exact path="/about">
-            <About />
-          </Route>
-          <Route exact path="/"> */}
-            <Textform
-              showAlert={showAlert}
-              heading="Enter the text to analyze "
-              mode={mode}
+        <div className="container my-3 mb-4">
+          <Switch>
+            <Route exact path="/about">
+              <About mode={mode} />
+            </Route>
+            <Route exact path="/">
+              <Textform
+                showAlert={showAlert}
+                heading=" TryTextutils-Word counter, Character counter, Remove extra spaces "
+                mode={mode}
               />
-          {/* </Route>
-        </Switch> */}
+            </Route>
+          </Switch>
         </div>
-      {/* </Router> */}
+      </Router>
     </>
   );
 }

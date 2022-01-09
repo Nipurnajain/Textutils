@@ -1,31 +1,28 @@
 import React, { useState } from "react";
 
-export default function About() {
-  const [myStyle, setMyStyle ] = useState({
-    color: "white",
-    backgroundColor: "black",
-  });
-  const [btntext, setBtnText] = useState("Enable dark mode");
-  const toggleStyle = () => {
-    if (myStyle.color === "white") {
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-      });
-      setBtnText("Enable dark mode");
-    } else {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "black",
-      });
-      setBtnText("Enable light mode");
-    }
+export default function About(props) {
+  //const [myStyle, setMyStyle ] = useState({
+  // color: "white",
+  //backgroundColor: "black",
+  //});
+  let myStyle = {
+    color: props.mode === "dark" ? "white" : "black",
+    backgroundColor: props.mode === "dark" ? "#042743" : "white",
+    border: "0.5px solid",
+    borderColor: "white",
   };
+
   return (
-    <div className="container my-3" style={myStyle}>
-      <h2 className="my-2 ">About us</h2>
+    <div className="container my-3">
+      <h2
+        className="my-2 "
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
+        About us
+      </h2>
+
       <div className="accordion" id="accordionExample" style={myStyle}>
-        <div className="accordion-item">
+        <div className="accordion-item" style={myStyle}>
           <h2 className="accordion-header" id="headingOne">
             <button
               className="accordion-button"
@@ -36,7 +33,7 @@ export default function About() {
               aria-controls="collapseOne"
               style={myStyle}
             >
-              Accordion Item #1
+              <strong>Analyse your text</strong>
             </button>
           </h2>
           <div
@@ -46,18 +43,12 @@ export default function About() {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body" style={myStyle}>
-              <strong>This is the first item's accordion body.</strong> It is
-              shown by default, until the collapse plugin adds the appropriate
-              classes that we use to style each element. These classes control
-              the overall appearance, as well as the showing and hiding via CSS
-              transitions. You can modify any of this with custom CSS or
-              overriding our default variables. It's also worth noting that just
-              about any HTML can go within the <code>.accordion-body</code>,
-              though the transition does limit overflow.
+              Textutils gives ou a way to analyse your text quickly and
+              efficiently be it word count or copying your text.
             </div>
           </div>
         </div>
-        <div className="accordion-item">
+        <div className="accordion-item" style={myStyle}>
           <h2 className="accordion-header" id="headingTwo">
             <button
               className="accordion-button collapsed"
@@ -68,7 +59,7 @@ export default function About() {
               aria-controls="collapseTwo"
               style={myStyle}
             >
-              Accordion Item #2
+              <strong>Free to use</strong>
             </button>
           </h2>
           <div
@@ -89,7 +80,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="accordion-item">
+        <div className="accordion-item" style={myStyle}>
           <h2 className="accordion-header" id="headingThree">
             <button
               className="accordion-button collapsed"
@@ -100,7 +91,7 @@ export default function About() {
               aria-controls="collapseThree"
               style={myStyle}
             >
-              Accordion Item #3
+              <strong>Browser compatible</strong>
             </button>
           </h2>
           <div
@@ -122,15 +113,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className="container my-3">
-        <button
-          type="button"
-          onClick={toggleStyle}
-          className="btn btn-secondary"
-        >
-          {btntext}
-        </button>
-      </div>
+      <div className="container my-3"></div>
     </div>
   );
 }

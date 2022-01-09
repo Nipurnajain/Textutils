@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 export default function Textform(props) {
   const handleupclick = () => {
     console.log("uppercase was clicked" + text);
@@ -44,13 +45,25 @@ export default function Textform(props) {
             }}
           ></textarea>
         </div>
-        <button className="btn-primary mx-1" onClick={handleupclick}>
+        <button
+          disabled={text.length === 0}
+          className="btn-primary mx-1 my-1"
+          onClick={handleupclick}
+        >
           convert to uppercase
         </button>
-        <button className="btn-primary mx-2" onClick={handleloclick}>
+        <button
+          disabled={text.length === 0}
+          className="btn-primary mx-2 my-1"
+          onClick={handleloclick}
+        >
           convert to lowercase
         </button>
-        <button className="btn-primary" onClick={handleclearclick}>
+        <button
+          disabled={text.length === 0}
+          className="btn-primary my-1"
+          onClick={handleclearclick}
+        >
           clear text
         </button>
       </div>
@@ -60,11 +73,22 @@ export default function Textform(props) {
       >
         <h2>Your text summary</h2>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {
+            text.split(/\s+/).filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words and {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} minutes read</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          minutes read
+        </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Nothing to preview"}</p>
       </div>
     </>
   );
