@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 export default function Textform(props) {
   const handleupclick = () => {
     console.log("uppercase was clicked" + text);
@@ -24,6 +23,19 @@ export default function Textform(props) {
     console.log("on change");
     setText(event.target.value);
   };
+  const handleCopy = () => {
+    console.log("I am copy");
+    var text = document.getElementById("myBox");
+    text.select();
+    text.setSelectionRange(0, 9999);
+    navigator.clipboard.writeText(text.value);
+    props.showAlert("Copied to Clipboard!", "success");
+  };
+  const handleExtraSpaces = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+    props.showAlert("Extra spaces removed!", "success");
+  };
   const [text, setText] = useState("");
   return (
     <>
@@ -35,7 +47,7 @@ export default function Textform(props) {
         <div className=" container my-3">
           <textarea
             className="form-control"
-            id="mybox"
+            id="myBox"
             rows="8"
             value={text}
             onChange={handleonChange}
@@ -65,6 +77,20 @@ export default function Textform(props) {
           onClick={handleclearclick}
         >
           clear text
+        </button>
+        <button
+          className="btn-primary mx-2 my-1"
+          onClick={handleCopy}
+          disabled={text.length === 0}
+        >
+          Copy Text
+        </button>
+        <button
+          className="btn-primary mx-2 my-1"
+          onClick={handleExtraSpaces}
+          disabled={text.length === 0}
+        >
+          Remove Extra Spaces
         </button>
       </div>
       <div
